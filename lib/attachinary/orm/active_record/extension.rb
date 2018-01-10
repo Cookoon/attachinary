@@ -14,10 +14,11 @@ module Attachinary
           as: :attachinariable,
           class_name: '::Attachinary::File',
           conditions: { scope: options[:scope].to_s },
-          dependent: :destroy
+          dependent: :destroy,
+          order: options[:order]
       else
         has_many :"#{relation}",
-          -> { where scope: options[:scope].to_s }, 
+          -> { where(scope: options[:scope].to_s).order(options[:order]) },
           as: :attachinariable,
           class_name: '::Attachinary::File',
           dependent: :destroy
